@@ -28,16 +28,20 @@ public abstract class Drug {
         this.ingredients = ingredients;
     }
 
-
-    public void checkQuality() {
+@Override
+    public void checkDrug(){
         List<Ingredients> schowek = new ArrayList<>(ingredients);
-
-        for(Ingredients element : schowek) {
+        for (Ingredients element : schowek){
             int value = element.getQuality();
             quality -= value;
         }
-        drugControler.checkDrug(quality > 70);
+        if (quality > 70){
+            System.out.println("Quality perfect");
+        } else {
+            throw new BadDrugQualityException("Bad quality");
+        }
     }
+    
     public abstract double countPrice();
 
 
