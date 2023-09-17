@@ -14,6 +14,17 @@ import java.util.List;
 
 public class DrugTest {
 
+    @Test(expected = BadDrugQualityException.class)
+    public void shouldThrowBadDrugQualityException() {
+        Lsd lsdWithBadQuality = new Lsd("LSD", 15.0, List.of(Ingredients.ACID, Ingredients.ACID,  Ingredients.ACID), 5);
+        lsdWithBadQuality.checkDrug();
+    }
+    @Test
+    public void shouldNotThrowBadDrugQualityException(){
+        Lsd lsdWithBadQuality = new Lsd("LSD", 15.0, List.of(Ingredients.GLASS, Ingredients.GLASS,  Ingredients.ACID), 5);
+        lsdWithBadQuality.checkDrug();
+    }
+    
     @Test(expected = NotEnoughIngrediensInDrugException.class)
     public void shouldThrowNotEnoughIngrediensInDrugException() {
         Lsd lsd = new Lsd("LSD", 34.12, List.of(Ingredients.ACID, Ingredients.FLOUR), 5);
